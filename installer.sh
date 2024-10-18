@@ -26,7 +26,7 @@ WINGSNOQUESTIONS=false
 function trap_ctrlc ()
 {
     echo ""
-    echo "Bye!"
+    echo "Adios!"
     exit 2
 }
 trap "trap_ctrlc" 2
@@ -157,7 +157,7 @@ panel_webserver(){
             panel_fqdn
             ;;
         * ) echo ""
-            echo "Please enter a valid option from 1-2"
+            echo "Por favor ingresa una opción válida del 1-2"
     esac
 }
 
@@ -385,16 +385,16 @@ panel_summary(){
 
 panel_fqdn(){
     send_summary
-    echo "[!] Please enter FQDN. You will access Panel with this."
-    echo "[!] Example: panel.yourdomain.dk."
+    echo "[!] Por favor ingrese FQDN. Accederás al Panel con esto."
+    echo "[!] Ejemplo: panel.yourdomain.dk."
     read -r FQDN
-    [ -z "$FQDN" ] && echo "FQDN can't be empty."
+    [ -z "$FQDN" ] && echo "FQDN no puede estar vacío."
     IP=$(dig +short myip.opendns.com @resolver2.opendns.com -4)
     DOMAIN=$(dig +short ${FQDN})
     if [ "${IP}" != "${DOMAIN}" ]; then
         echo ""
-        echo "Your FQDN does not resolve to the IP of this machine."
-        echo "Continuing anyway in 10 seconds.. CTRL+C to stop."
+        echo "Su FQDN no se resuelve con la IP de esta máquina."
+        echo "Continuando de todos modos en 10 segundos. CTRL+C para detener."
         sleep 10s
         panel_ssl
     else
@@ -404,11 +404,11 @@ panel_fqdn(){
 
 panel_ssl(){
     send_summary
-    echo "[!] Do you want to use SSL for your Panel? This is recommended. (Y/N)"
-    echo "[!] SSL is recommended for every panel."
+    echo "[!] ¿Quieres utilizar SSL para tu Panel? Esto es recomendable. (S/N)"
+    echo "[!] Se recomienda SSL para cada panel."
     read -r SSL_CONFIRM
 
-    if [[ "$SSL_CONFIRM" =~ [Yy] ]]; then
+    if [[ "$SSL_CONFIRM" =~ [Ss] ]]; then
         SSLSTATUS=true
         panel_email
     fi
@@ -421,10 +421,10 @@ panel_ssl(){
 panel_email(){
     send_summary
     if  [ "$SSLSTATUS" =  "true" ]; then
-        echo "[!] Please enter your email. It will be shared with Lets Encrypt and being used to setup this Panel."
+        echo "[!] Por favor ingrese su correo electrónico. Se compartirá con Lets Encrypt y se utilizará para configurar este Panel."
         fi
     if  [ "$SSLSTATUS" =  "false" ]; then
-        echo "[!] Please enter your email. It will used to setup this Panel."
+        echo "[!] Por favor ingrese su correo electrónico. Se utilizará para configurar este Panel."
         fi
     read -r EMAIL
     panel_username
@@ -432,7 +432,7 @@ panel_email(){
 
 panel_username(){
     send_summary
-    echo "[!] Please enter username for admin account. You can use your username to login to your Pterodactyl Account."
+    echo "[!] Por favor ingrese el nombre de usuario para la cuenta de administrador. Puede utilizar su nombre de usuario para iniciar sesión en su cuenta Pterodactyl."
     read -r USERNAME
     panel_firstname
 }

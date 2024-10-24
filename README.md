@@ -1,43 +1,32 @@
-# Pterodactyl Installer
+<h1 align="center"><strong>Pterodactyl Installer</strong></h1>
 Instalador de Pterodactyl Con este script puedes instalar, actualizar o eliminar fácilmente el panel de Pterodactyl. Todo está reunido en un solo script. Por favor, ten en cuenta que este script está hecho para funcionar en una instalación nueva. Hay una buena posibilidad de que falle si no es una instalación nueva. El script debe ejecutarse como root. Lee sobre Pterodactyl aquí. Este script no está asociado con el proyecto oficial de Pterodactyl.
 
-Características
-
+# Características
 ¡Compatible con la versión más reciente de Pterodactyl!
-
 Este script es uno de los únicos que tiene una característica de cambio de dominios que funciona bien.
 
-Instalaciones
+- Instalaciones
+- Instalar Panel
+- Instalar Wings
+- Instalar Panel y Wings
+- Instalar PHPMyAdmin
+- Desinstalar PHPMyAdmin
+- Cambiar Dominios de Pterodactyl
+- Desinstalar Panel
+- Desinstalar Wings
+- Autoinstalación [SOLO NGINX & BETA]
 
-Instalar Panel
-
-Instalar Wings
-
-Instalar Panel y Wings
-
-Instalar PHPMyAdmin
-
-Desinstalar PHPMyAdmin
-
-Cambiar Dominios de Pterodactyl
-
-Desinstalar Panel
-
-Desinstalar Wings
-
-Autoinstalación [SOLO NGINX & BETA]
-
-Sistemas Operativos y Servidores Web Soportados
+# Sistemas Operativos y Servidores Web Soportados
 
 Sistemas Operativos:
 
-Ubuntu desde 18.04 hasta 22.04 ✅
+| Operating System | Version               | Supported                          |   PHP |
+| ---------------- | ----------------------| ---------------------------------- | ----- |
+| Ubuntu           | Desde  18.04 to 22.04 | :white_check_mark:                 | 8.1   |
+| Debian           | Desde 11 to 12        | :white_check_mark:                 | 8.1   |
+| CentOS           |       centos 7        | :white_check_mark:                 | 8.1   |
+| Rocky Linux      | no supported versions | :x:                                | :x:   |
 
-Debian desde 11 hasta 12 ✅
-
-CentOS 7 ✅
-
-Rocky Linux (ninguna versión soportada) ❌❌
 
 ⚠️ Ten en cuenta que CentOS 7 está en fin de vida útil y no se añadirá soporte en este script para ninguna versión más nueva de CentOS. Si estás usando CentOS y quieres usar este script, deberías cambiarte a una nueva distribución, como Debian o Ubuntu.
 

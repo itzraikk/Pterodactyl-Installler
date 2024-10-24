@@ -871,50 +871,50 @@ switch(){
         echo ""
         echo "[!] Change domains"
         echo ""
-        echo "    Your domain has been switched to $DOMAINSWITCH"
-        echo "    This script does not update your APP URL, you can"
-        echo "    update it in /var/www/pterodactyl/.env"
+        echo "    Dominio Cmbiado a $DOMAINSWITCH"
+        echo "    Este Script no Actualiza la URL de tu APP, Puedes"
+        echo "    actualizarla en /var/www/pterodactyl/.env"
         echo ""
-        echo "    If using Cloudflare certifiates for your Panel, please read this:"
-        echo "    The script uses Lets Encrypt to complete the change of your domain,"
-        echo "    if you normally use Cloudflare Certificates,"
-        echo "    you can change it manually in its config which is in the same place as before."
+        echo "    Si utiliza certificados de Cloudflare para su Panel, lea esto:"
+        echo "    El script utiliza Lets Encrypt para completar el cambio de su dominio."
+        echo "    si normalmente utiliza certificados de Cloudflare",
+        echo "    puedes cambiarlo manualmente en su configuración que está en el mismo lugar que antes".
         echo ""
         fi
     if  [ "$SSLSWITCH" =  "false" ]; then
-        echo "[!] Switching your domain.. This wont take long!"
-        rm /etc/nginx/sites-enabled/pterodactyl.conf || exit || echo "An error occurred. Could not delete file." || exit
+        echo "[!] Cambiando tu dominio... Esto no tomará mucho tiempo!"
+        rm /etc/nginx/sites-enabled/pterodactyl.conf || exit || echo "Se produjo un error. No se pudo eliminar el archivo." || exit
         curl -o /etc/nginx/sites-enabled/pterodactyl.conf https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/configs/pterodactyl-nginx.conf || exit || warning "Pterodactyl Panel not installed!"
         sed -i -e "s@<domain>@${DOMAINSWITCH}@g" /etc/nginx/sites-enabled/pterodactyl.conf
         systemctl restart nginx
         echo ""
-        echo "[!] Change domains"
+        echo "[!] Cambiar Dominios"
         echo ""
-        echo "    Your domain has been switched to $DOMAINSWITCH"
-        echo "    This script does not update your APP URL, you can"
-        echo "    update it in /var/www/pterodactyl/.env"
+        echo "    Su dominio ha sido cambiado a $DOMAINSWITCH"
+        echo "    Este script no actualiza la URL de tu aplicación, tú puedes hacerlo"
+        echo "    actualízalo en /var/www/pterodactyl/.env"
         fi
 }
 
 switchemail(){
     echo ""
-    echo "[!] Change domains"
-    echo "    To install your new domain certificate to your Panel, your email address must be shared with Let's Encrypt."
-    echo "    They will send you an email when your certificate is about to expire. A certificate lasts 90 days at a time and you can renew your certificates for free and easily, even with this script."
-    echo ""
-    echo "    When you created your certificate for your panel before, they also asked you for your email address. It's the exact same thing here, with your new domain."
-    echo "    Therefore, enter your email. If you do not feel like giving your email, then the script can not continue. Press CTRL + C to exit."
-    echo ""
-    echo "      Please enter your email"
+    echo "[!] Cambiar dominios"
+    echo "    Para instalar su nuevo certificado de dominio en su Panel, su dirección de correo electrónico debe compartirse con Let's Encrypt."
+    echo "    Le enviarán un correo electrónico cuando su certificado esté a punto de caducar. Un certificado dura 90 días a la vez y puede renovar sus certificados de forma gratuita y sencilla, incluso con este script".
+    eco ""
+    echo "    Cuando creaste tu certificado para tu panel antes, también te pidieron tu dirección de correo electrónico. Es exactamente lo mismo aquí, con tu nuevo dominio."
+    echo "    Por lo tanto, ingrese su correo electrónico. Si no tiene ganas de dar su correo electrónico, entonces el script no puede continuar. Presione CTRL + C para salir."
+    eco ""
+    echo "    Por favor ingresa tu correo electrónico"
 
     read -r EMAILSWITCHDOMAINS
     switch
 }
 
 switchssl(){
-    echo "[!] Select the one that describes your situation best"
-    warning "   [1] I want SSL on my Panel on my new domain"
-    warning "   [2] I don't want SSL on my Panel on my new domain"
+    echo "[!] Seleccione el que mejor describa su situación"
+    warning "    [1] Quiero SSL en mi Panel en mi nuevo dominio"
+    warning "    [2] No quiero SSL en mi Panel en mi nuevo dominio"
     read -r option
     case $option in
         1 ) option=1
@@ -926,14 +926,14 @@ switchssl(){
             switch
             ;;
         * ) echo ""
-            echo "Please enter a valid option."
+            echo "Por faor Ingresa una Opcion Valida."
     esac
 }
 
 switchdomains(){
     echo ""
-    echo "[!] Change domains"
-    echo "    Please enter the domain (panel.mydomain.ltd) you want to switch to."
+    echo "[!] Cambiar dominios"
+    echo "    Ingrese el dominio (panel.midominio.ltd) al que desea cambiar."
     read -r DOMAINSWITCH
     switchssl
 }
@@ -941,11 +941,11 @@ switchdomains(){
 ### OS Check ###
 
 oscheck(){
-    echo "Checking your OS.."
+    echo "Reisando tu OS.."
     if { [ "$dist" = "ubuntu" ] && [ "$version" = "18.04" ] || [ "$version" = "20.04" ] || [ "$version" = "22.04" ]; } || { [ "$dist" = "centos" ] && [ "$version" = "7" ]; } || { [ "$dist" = "debian" ] && [ "$version" = "11" ] || [ "$version" = "12" ]; }; then
         options
     else
-        echo "Your OS, $dist $version, is not supported"
+        echo "Tu OS, $dist $version, No es Soportado"
         exit 1
     fi
 }
@@ -954,13 +954,13 @@ oscheck(){
 
 options(){
     if [ "$dist" = "centos" ] && { [ "$version" = "7" ]; }; then
-        echo "Your opportunities has been limited due to CentOS 7."
-        echo ""
-        echo "What would you like to do?"
-        echo "[1] Install Panel."
-        echo "[2] Install Wings."
-        echo "[3] Remove Panel."
-        echo "[4] Remove Wings."
+        echo "    Tus oportunidades han sido limitadas debido a CentOS 7."
+        eco ""
+        echo "    ¿Qué te gustaría hacer?"
+        echo "    [1] Panel de instalación".
+        echo "    [2] Instalar Wings".
+        echo "    [3] Eliminar panel".
+        echo "    [4] Quitar Wings".
         echo "Input 1-4"
         read -r option
         case $option in
@@ -979,18 +979,18 @@ options(){
                 wings_remove
                 ;;
             * ) echo ""
-                echo "Please enter a valid option from 1-4"
+                echo "Por favor ingresa una Opcio valida de 1-4"
         esac
     else
-        echo "What would you like to do?"
-        echo "[1] Install Panel"
-        echo "[2] Install Wings"
-        echo "[3] Panel & Wings"
-        echo "[4] Install PHPMyAdmin"
-        echo "[5] Remove PHPMyAdmin"
-        echo "[6] Remove Wings"
-        echo "[7] Remove Panel"
-        echo "[8] Switch Pterodactyl Domain"
+        echo "¿Qué te gustaría hacer?"
+        echo "[1] Panel de instalación"
+        echo "[2] Instalar Wings"
+        echo "[3] Panel y Wings"
+        echo "[4] Instalar PHPMyAdmin"
+        echo "[5] Eliminar PHPMyAdmin"
+        echo "[6] Quitar Wings"
+        echo "[7] Eliminar panel"
+        echo "[8] Cambiar dominio de pterodactyl"
         echo "Input 1-8"
         read -r option
         case $option in
@@ -1022,7 +1022,7 @@ options(){
                 switchdomains
                 ;;
             * ) echo ""
-                echo "Please enter a valid option from 1-8"
+                echo "Por favor ingresa una opción válida del 1 al 8"
         esac
     fi
 }
@@ -1032,9 +1032,9 @@ options(){
 clear
 echo ""
 echo "Pterodactyl Installer @ v2.1"
-echo "Copyright 2024, Malthe K, <me@malthe.cc>"
-echo "https://github.com/guldkage/Pterodactyl-Installer"
+echo "Copyright 2024, ItzRaikk, <contacto@itzraikk.de>"
+echo "https://github.com/itzraikk/Pterodactyl-Installer"
 echo ""
-echo "This script is not associated with the official Pterodactyl Panel."
+echo "Este Script no esta asociado con la Documentación oficial de Pterodactyl."
 echo ""
 oscheck

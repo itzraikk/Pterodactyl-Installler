@@ -368,17 +368,17 @@ panel_summary(){
     echo "    Last name: $LASTNAME"
     echo "    Password: $(printf "%0.s*" $(seq 1 ${#USERPASSWORD}))"
     echo ""
-    echo "    These credentials will be saved in a file called" 
-    echo "    panel_credentials.txt in your current directory"
+    echo "    Las Credenciales seran guardadas en el archivo" 
+    echo "    panel_credentials.txt en tu directorio Actual"
     echo "" 
-    echo "    Do you want to start the installation? (Y/N)" 
+    echo "    Iniciar Instalación? (S/N)" 
     read -r PANEL_INSTALLATION
 
-    if [[ "$PANEL_INSTALLATION" =~ [Yy] ]]; then
+    if [[ "$PANEL_INSTALLATION" =~ [Ss] ]]; then
         panel_install
     fi
     if [[ "$PANEL_INSTALLATION" =~ [Nn] ]]; then
-        echo "[!] Installation has been aborted."
+        echo "[!] Instalación Aboratda."
         exit 1
     fi
 }
@@ -438,21 +438,21 @@ panel_username(){
 }
 panel_firstname(){
     send_summary
-    echo "[!] Please enter first name for admin account."
+    echo "[!] Nombre"
     read -r FIRSTNAME
     panel_lastname
 }
 
 panel_lastname(){
     send_summary
-    echo "[!] Please enter last name for admin account."
+    echo "[!] Apellido."
     read -r LASTNAME
     panel_password
 }
 
 panel_password(){
     send_summary
-    echo "[!] Please enter password for admin account."
+    echo "[!] Contraseña."
     local USERPASSWORD=""
     while IFS= read -r -s -n 1 char; do
         if [[ $char == $'\0' ]]; then
@@ -489,7 +489,7 @@ wings(){
     elif [ "$WINGSNOQUESTIONS" = "false" ]; then
         clear
         echo ""
-        echo "[!] Before installation, we need some information."
+        echo "[!] Antes de la Instalación, Necesitamos Algo de Información."
         echo ""
         wings_fqdn
     fi
@@ -497,12 +497,12 @@ wings(){
 
 
 wings_fqdnask(){
-    echo "[!] Do you want to install a SSL certificate? (Y/N)"
-    echo "    If yes, you will be asked for an email."
-    echo "    The email will be shared with Lets Encrypt."
+    echo "[!] Instalar Certificado SSl? (S/N)"
+    echo "    Si si, Te preguntaremos por un EMAIL."
+    echo "    El EMAIL Sera compartido con Lets Encrypt."
     read -r WINGS_SSL
 
-    if [[ "$WINGS_SSL" =~ [Yy] ]]; then
+    if [[ "$WINGS_SSL" =~ [Ss] ]]; then
         panel_fqdn
     fi
     if [[ "$WINGS_SSL" =~ [Nn] ]]; then
@@ -519,11 +519,11 @@ wings_full(){
             curl -sSL https://get.docker.com/ | CHANNEL=stable bash
              systemctl enable --now docker
         else
-            echo "[!] Docker is already installed."
+            echo "[!] Docker Ya esta Instalado."
         fi
 
         if ! mkdir -p /etc/pterodactyl; then
-            echo "[!] An error occurred. Could not create directory." >&2
+            echo "[!] Ocurrio un Error. No se pudo crear el Directorio." >&2
             exit 1
         fi
 
@@ -537,9 +537,9 @@ wings_full(){
         chmod u+x /usr/local/bin/wings
         clear
         echo ""
-        echo "[!] Pterodactyl Wings successfully installed."
-        echo "    You still need to setup the Node"
-        echo "    on the Panel and restart Wings after."
+        echo "[!] Pterodactyl Wings Instaladas Exitosamente."
+        echo "    Aun necesitas Poner El Nodo"
+        echo "    en el Panel y reiniciar las Wings."
         echo ""
 
         if [ "$INSTALLBOTH" = "true" ]; then
@@ -547,18 +547,18 @@ wings_full(){
             finish
             fi
     else
-        echo "[!] Your OS is not supported for installing Wings with this installer"
+        echo "[!] Tu OS No puede instalar Wings con este Instalador"
     fi
 }
 
 wings_fqdn(){
-    echo "[!] Please enter your FQDN if you want to install a SSL certificate. If not, press enter and leave this blank."
+    echo "[!] Inggresa tu FQDN Para instalar el Certificado SSL."
     read -r WINGS_FQDN
     IP=$(dig +short myip.opendns.com @resolver2.opendns.com -4)
     DOMAIN=$(dig +short ${WINGS_FQDN})
     if [ "${IP}" != "${DOMAIN}" ]; then
         echo ""
-        echo "FQDN canceled. Either FQDN is incorrect or you left this blank."
+        echo "FQDN cancelado. O FQDN Es Incorrecto o lo dejaste en blanco."
         WINGS_FQDN_STATUS=false
         wings_full
     else
@@ -572,16 +572,16 @@ wings_fqdn(){
 phpmyadmin(){
     apt install dnsutils -y
     echo ""
-    echo "[!] Before installation, we need some information."
+    echo "[!] Antes de la INstalación, Necesitamos algo de Información."
     echo ""
     phpmyadmin_fqdn
 }
 
 phpmyadmin_finish(){
     cd
-    echo -e "PHPMyAdmin Installation\n\nSummary of the installation\n\nPHPMyAdmin URL: $PHPMYADMIN_FQDN\nPreselected webserver: NGINX\nSSL: $PHPMYADMIN_SSLSTATUS\nUser: $PHPMYADMIN_USER_LOCAL\nPassword: $PHPMYADMIN_PASSWORD\nEmail: $PHPMYADMIN_EMAIL" > phpmyadmin_credentials.txt
+    echo -e "PHPMyAdmin Instalación\n\nResultado de la Instalación\n\nPHPMyAdmin URL: $PHPMYADMIN_FQDN\nPreselected webserver: NGINX\nSSL: $PHPMYADMIN_SSLSTATUS\nUser: $PHPMYADMIN_USER_LOCAL\nPassword: $PHPMYADMIN_PASSWORD\nEmail: $PHPMYADMIN_EMAIL" > phpmyadmin_credentials.txt
     clear
-    echo "[!] Installation of PHPMyAdmin done"
+    echo "[!] Instalación de PHPMyAdmin Finalizada"
     echo ""
     echo "    Summary of the installation" 
     echo "    PHPMyAdmin URL: $PHPMYADMIN_FQDN"
@@ -591,8 +591,8 @@ phpmyadmin_finish(){
     echo "    Password: $PHPMYADMIN_PASSWORD"
     echo "    Email: $PHPMYADMIN_EMAIL"
     echo ""
-    echo "    These credentials will has been saved in a file called" 
-    echo "    phpmyadmin_credentials.txt in your current directory"
+    echo "    Estas credenciales fueron guardadas en el archivo" 
+    echo "    phpmyadmin_credentials.txt En tu directorio actual"
     echo ""
 }
 
@@ -622,15 +622,15 @@ phpmyadminweb(){
 
 phpmyadmin_fqdn(){
     send_phpmyadmin_summary
-    echo "[!] Please enter FQDN. You will access PHPMyAdmin with this."
+    echo "[!] Por favor ingresa FQDN. Accederas a PhPMyAdmin con este."
     read -r PHPMYADMIN_FQDN
-    [ -z "$PHPMYADMIN_FQDN" ] && echo "FQDN can't be empty."
+    [ -z "$PHPMYADMIN_FQDN" ] && echo "FQDN No puede estar Vacio."
     IP=$(dig +short myip.opendns.com @resolver2.opendns.com -4)
     DOMAIN=$(dig +short ${PHPMYADMIN_FQDN})
     if [ "${IP}" != "${DOMAIN}" ]; then
         echo ""
-        echo "Your FQDN does not resolve to the IP of this machine."
-        echo "Continuing anyway in 10 seconds.. CTRL+C to stop."
+        echo "Tu FQDN No ressuelve a la IP De la Maquina."
+        echo "Continuenado en 10 seconds.. CTRL+C Para parar."
         sleep 10s
         phpmyadmin_ssl
     else
@@ -689,17 +689,17 @@ phpmyadmin_summary(){
     echo "    User: $PHPMYADMIN_USER_LOCAL"
     echo "    Email: $PHPMYADMIN_EMAIL"
     echo ""
-    echo "    These credentials have been saved in a file called" 
-    echo "    phpmyadmin_credentials.txt in your current directory"
+    echo "    Estas credenciales fueron guardadas en el archivo" 
+    echo "    phpmyadmin_credentials.txt en tu directorio actual"
     echo "" 
-    echo "    Do you want to start the installation? (Y/N)" 
+    echo "    Comenzar Innstalación? (S/N)" 
     read -r PHPMYADMIN_INSTALLATION
 
-    if [[ "$PHPMYADMIN_INSTALLATION" =~ [Yy] ]]; then
+    if [[ "$PHPMYADMIN_INSTALLATION" =~ [Ss] ]]; then
         phpmyadmininstall
     fi
     if [[ "$PHPMYADMIN_INSTALLATION" =~ [Nn] ]]; then
-        echo "[!] Installation has been aborted."
+        echo "[!] Instalación Aboratada."
         exit 1
     fi
 }
@@ -708,10 +708,10 @@ send_phpmyadmin_summary(){
     clear
     echo ""
     if [ -d "/var/www/phpymyadmin" ]; then
-        warning "[!] WARNING: There seems to already be an installation of PHPMyAdmin installed! This script will fail!"
+        warning "[!] ADVERTENCIA: PArece que ya instalaste PhPMyAdmin! El Script Fallara!"
     fi
     echo ""
-    echo "[!] Summary:"
+    echo "[!] Resultado:"
     echo "    PHPMyAdmin URL: $PHPMYADMIN_FQDN"
     echo "    Preselected webserver: NGINX"
     echo "    SSL: $PHPMYADMIN_SSLSTATUS"
@@ -722,10 +722,10 @@ send_phpmyadmin_summary(){
 
 phpmyadmin_ssl(){
     send_phpmyadmin_summary
-    echo "[!] Do you want to use SSL for PHPMyAdmin? This is recommended. (Y/N)"
+    echo "[!] Quieres usar SSL para PHPMyAdmin? Es recomendado. (S/N)"
     read -r SSL_CONFIRM
 
-    if [[ "$SSL_CONFIRM" =~ [Yy] ]]; then
+    if [[ "$SSL_CONFIRM" =~ [Ss] ]]; then
         PHPMYADMIN_SSLSTATUS=true
         phpmyadmin_email
     fi
@@ -737,7 +737,7 @@ phpmyadmin_ssl(){
 
 phpmyadmin_user(){
     send_phpmyadmin_summary
-    echo "[!] Please enter username for admin account."
+    echo "[!] Ingresa noombre de Usuario para cuenta de Admin."
     read -r PHPMYADMIN_USER_LOCAL
     phpmyadmin_summary
 }
@@ -745,7 +745,7 @@ phpmyadmin_user(){
 phpmyadmin_email(){
     send_phpmyadmin_summary
     if  [ "$PHPMYADMIN_SSLSTATUS" =  "true" ]; then
-        echo "[!] Please enter your email. It will be shared with Lets Encrypt."
+        echo "[!] Por favor ingresa tu EMAIL. Sera compratido con Lets Encrypt."
         read -r PHPMYADMIN_EMAIL
         phpmyadmin_user
         fi
@@ -759,7 +759,7 @@ phpmyadmin_email(){
 
 wings_remove(){
     echo ""
-    echo "[!] Are you sure you want to remove Wings? If you have any servers on this machine, they will also get removed. (Y/N)"
+    echo "[!] Seguro que quieres remover las Wings? Si tienes algun servidor en esta maquina tambien sera Removido. (Y/N)"
     read -r UNINSTALLWINGS
 
     if [[ "$UNINSTALLWINGS" =~ [Yy] ]]; then
@@ -769,7 +769,7 @@ wings_remove(){
          rm /usr/local/bin/wings || exit || warning "Wings is not installed!" # Removes wings
          rm /etc/systemd/system/wings.service # Removes wings service file
         echo ""
-        echo "[!] Pterodactyl Wings has been uninstalled."
+        echo "[!] Pterodactyl Wings Fueron Desinstaladas."
         echo ""
     fi
 }
@@ -778,15 +778,15 @@ wings_remove(){
 
 removephpmyadmin(){
     echo ""
-    echo "[!] Do you really want to delete PHPMyAdmin? /var/www/phpmyadmin will be deleted, and cannot be recovered. (Y/N)"
+    echo "[!] Seguro que Quieres remover PHPMyAdmin? /var/www/phpmyadmin Sera Borrado y no se puede recuperar. (S/N)"
     read -r UNINSTALLPHPMYADMIN
 
-    if [[ "$UNINSTALLPHPMYADMIN" =~ [Yy] ]]; then
-         rm -rf /var/www/phpmyadmin || exit || warning "PHPMyAdmin is not installed!" # Removes PHPMyAdmin files
-         echo "[!] PHPMyAdmin has been removed."
+    if [[ "$UNINSTALLPHPMYADMIN" =~ [Ss] ]]; then
+         rm -rf /var/www/phpmyadmin || exit || warning "PHPMyAdmin No esta Instalado!" # Removes PHPMyAdmin files
+         echo "[!] PHPMyAdmin Fue removido."
     fi
     if [[ "$UNINSTALLPHPMYADMIN" =~ [Nn] ]]; then
-        echo "[!] Removal aborted."
+        echo "[!] CAncelado."
     fi
 }
 
@@ -794,10 +794,10 @@ removephpmyadmin(){
 
 uninstallpanel(){
     echo ""
-    echo "[!] Do you really want to delete Pterodactyl Panel? All files & configurations will be deleted. (Y/N)"
+    echo "[!] Seguro que qquieres Remover el Pterodactyl Panel? Todos los archivos seran removidos. (S/N)"
     read -r UNINSTALLPANEL
 
-    if [[ "$UNINSTALLPANEL" =~ [Yy] ]]; then
+    if [[ "$UNINSTALLPANEL" =~ [Ss] ]]; then
         uninstallpanel_backup
     fi
     if [[ "$UNINSTALLPANEL" =~ [Nn] ]]; then
@@ -807,10 +807,10 @@ uninstallpanel(){
 
 uninstallpanel_backup(){
     echo ""
-    echo "[!] Do you want to keep your database and backup your .env file? (Y/N)"
+    echo "[!] quieres mantener tu database y backup tu archivo .env? (S/N)"
     read -r UNINSTALLPANEL_CHANGE
 
-    if [[ "$UNINSTALLPANEL_CHANGE" =~ [Yy] ]]; then
+    if [[ "$UNINSTALLPANEL_CHANGE" =~ [Ss] ]]; then
         BACKUPPANEL=true
         uninstallpanel_confirm
     fi
@@ -831,13 +831,13 @@ uninstallpanel_confirm(){
         systemctl restart nginx
         clear
         echo ""
-        echo "[!] Pterodactyl Panel has been uninstalled."
-        echo "    Your Panel database has not been deleted"
-        echo "    and your .env file is in your current directory."
+        echo "[!] Pterodactyl Panel Fue desinstalado."
+        echo "    Tu database del panel no fue eliminada"
+        echo "    y tu archivo .env esta en tu directorio actual"
         echo ""
         fi
     if  [ "$BACKUPPANEL" =  "false" ]; then
-         rm -rf /var/www/pterodactyl || exit || warning "Panel is not installed!" # Removes panel files
+         rm -rf /var/www/pterodactyl || exit || warning "Panel no esta Instalado!" # Removes panel files
          rm /etc/systemd/system/pteroq.service # Removes pteroq service worker
          unlink /etc/nginx/sites-enabled/pterodactyl.conf # Removes nginx config (if using nginx)
          unlink /etc/apache2/sites-enabled/pterodactyl.conf # Removes Apache config (if using apache)
@@ -847,8 +847,8 @@ uninstallpanel_confirm(){
         systemctl restart nginx
         clear
         echo ""
-        echo "[!] Pterodactyl Panel has been uninstalled."
-        echo "    Files, services, configs and your database has been deleted."
+        echo "[!] Pterodactyl Panel Fue desinstalado."
+        echo "    Archivos, Servicios, Configuraciones y todo fue borrado."
         echo ""
         fi
 }
@@ -858,10 +858,10 @@ uninstallpanel_confirm(){
 switch(){
     if  [ "$SSLSWITCH" =  "true" ]; then
         echo ""
-        echo "[!] Change domains"
+        echo "[!] Cambiar Dominios"
         echo ""
-        echo "    The script is now changing your Pterodactyl Domain."
-        echo "      This may take a couple seconds for the SSL part, as SSL certificates are being generated."
+        echo "    El script esta cambiando tu Dominio Pterodactyl."
+        echo "      Esto puede tomar unos segundos por los Certificados SSL, SSL Certificados estan Siendo Generados"
         rm /etc/nginx/sites-enabled/pterodactyl.conf
         curl -o /etc/nginx/sites-enabled/pterodactyl.conf https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/configs/pterodactyl-nginx-ssl.conf || exit || warning "Pterodactyl Panel not installed!"
         sed -i -e "s@<domain>@${DOMAINSWITCH}@g" /etc/nginx/sites-enabled/pterodactyl.conf

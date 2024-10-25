@@ -40,7 +40,8 @@ Lee sobre [Pterodactyl](https://pterodactyl.io) aquí. Este script no está asoc
 
 Copyright 2024-2025, [ItzRaikk](https://github.com/itzraikk), contacto@itzraaikk.dev
 <br>
-Created and maintained by [ItzRaikk](https://github.com/itzraikk)
+Traducido y Mantenido Por [ItzRaikk](https://github.com/itzraikk)
+Creado Por [Malte K.](https://github.com/guldkage)
 
 # Soporte
 
@@ -51,4 +52,31 @@ La forma recomendada de usar este script.
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/itzraikk/Pterodactyl-Installer/main/installer.sh)
+```
+
+# Raspbian
+Solo para usuarios de Raspbian. Podrían necesitar un extra < al inicio.
+```bash
+bash < <(curl -s https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/installer.sh)
+```
+
+# Autoinstalación / Instalación para Desarrolladores
+¡Solo usa esto si sabes lo que estás haciendo! Ahora puedes instalar Pterodactyl usando un comando sin tener que escribir nada manualmente después de ejecutar el comando.
+
+### Campos Requeridos
+```
+<fqdn> = Lo que quieres usar para acceder a tu panel. Ej. panel.dominio.ltd
+<ssl> = Si deseas usar SSL. Las opciones son true o false.
+<email> = Tu email. Si eliges SSL, se compartirá con Lets Encrypt.
+<username> = Nombre de usuario para la cuenta de administrador en Pterodactyl
+<firstname> = Primer nombre para la cuenta de administrador en Pterodactyl
+<lastname> = Apellido para la cuenta de administrador en Pterodactyl
+<password> = La contraseña para la cuenta de administrador en Pterodactyl
+<wings> = Si deseas tener Wings instalado automáticamente también. Las opciones son true o false.
+```
+
+Debes ser preciso al usar este script. Un error tipográfico y todo puede salir mal. También necesita ejecutarse en una versión nueva de Ubuntu o Debian.
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/itzraikk/Pterodactyl-Installer/main/autoinstall.sh)  <fqdn> <ssl> <email> <username> <firstname <lastname> <password> <wings>
 ```
